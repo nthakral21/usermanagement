@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 400px; /* Adjust the maximum width as needed */
+    width: 100%;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+input {
+    width: calc(100% - 20px); /* Adjust the width and spacing as needed */
+    padding: 10px;
+    margin-top: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.link {
+    color: blue;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+    </style>
+    <link rel="stylesheet" href="styles.css"> <!-- Include your common styles -->
+</head>
+<body>
+    <div class="container">
+        <h2>Complete Registration</h2>
+        <form action="/register" method="post">
+            <div class="form-group">
+                <input type="text" placeholder="Username" name="username" required>
+            </div>
+        
+            <div class="form-group">
+                <input type="email" placeholder="Email" name="email" required>
+            </div>
+        
+            <div class="form-group">
+                <input type="tel" placeholder="Phone Number" name="phone" pattern="[0-9]{10}" required>
+                <!-- The pattern attribute ensures that only 10-digit numbers are allowed -->
+            </div>
+        
+            <div class="form-group">
+                <input type="password" placeholder="Password" name="password" required>
+            </div>
+        
+            <button type="submit">Register</button>
+        </form>
+        
+        <p>Already have an account? <a href="/redirect-to-login" class="link">Login here</a>.</p>
+    </div>
+</body>
+</html>

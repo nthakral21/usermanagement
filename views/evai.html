@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logged In Successfully</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .button-container {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #4CAF50;
+            color: #fff;
+        }
+
+        .logout-button {
+            background-color: #d9534f;
+            color: #fff;
+        }
+
+        .logout-button:hover {
+            background-color: #c9302c;
+        }
+
+        .form-container {
+            display: none;
+            margin-top: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input {
+            margin: 10px 0;
+            padding: 8px;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Logged In Successfully</h1>
+
+        <div class="button-container">
+            <button class="button" onclick="showForm('addUserForm')">Add User</button>
+            <button class="button" onclick="showForm('updateUserForm')">Update User</button>
+            <button class="button" onclick="showForm('deleteUserForm')">Delete User</button>
+            <button class="button" onclick="showAllUsers()">Show Users</button>
+        </div>
+        <div id="result1"></div>
+        <!-- Add User Form -->
+        <div class="form-container" id="addUserForm">
+            <form action="/addUser" method="post">
+                <div class="form-group">
+                    <input type="text" placeholder="Username" name="username" required>
+                </div>
+            
+                <div class="form-group">
+                    <input type="email" placeholder="Email" name="email" required>
+                </div>
+            
+                <div class="form-group">
+                    <input type="tel" placeholder="Phone Number" name="phone" pattern="[0-9]{10}" required>
+                    <!-- The pattern attribute ensures that only 10-digit numbers are allowed -->
+                </div>
+            
+                <div class="form-group">
+                    <input type="password" placeholder="Password" name="password" required>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+
+        <!-- Update User Form -->
+        <div class="form-container" id="updateUserForm">
+            <form action="/updateUser" method="post">
+                <div class="form-group">
+                    <input type="text" placeholder="Username" name="username" required>
+                </div>
+            
+                <div class="form-group">
+                    <input type="email" placeholder="Email" name="email" required>
+                </div>
+            
+                <div class="form-group">
+                    <input type="tel" placeholder="Phone Number" name="phone" pattern="[0-9]{10}" required>
+                    <!-- The pattern attribute ensures that only 10-digit numbers are allowed -->
+                </div>
+            
+                <div class="form-group">
+                    <input type="password" placeholder="Password" name="password" required>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+
+        <!-- Delete User Form -->
+        <div class="form-container" id="deleteUserForm">
+            <form action="/deleteUser" method="post">
+                <label for="deleteUsername">Username:</label>
+                <input type="text" id="deleteUsername" name="deleteUsername" required />
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+
+        
+        <form action = "/logout">
+        <button class="button logout-button">Logout</button>
+    </form>
+    </div>
+
+    <script>
+        function showAllUsers() {
+        fetch("/showAllUsers")
+          .then((response) => response.text())
+          .then((data) => {
+            document.getElementById("result1").innerHTML = data;
+          });
+      }
+        function showForm(formId) {
+            // Hide all forms
+            const formContainers = document.querySelectorAll('.form-container');
+            formContainers.forEach(container => {
+                container.style.display = 'none';
+            });
+
+            // Show the selected form
+            const selectedForm = document.getElementById(formId);
+            if (selectedForm) {
+                selectedForm.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
